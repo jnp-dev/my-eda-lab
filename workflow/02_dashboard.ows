@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="02 · 분석 대시보드" description="실습지 실습 2 (Streamlit 대시보드) 를 Orange 위젯 조합으로 재현">
+	<nodes>
+		<node id="0" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="장비 정비이력" position="120, 430" />
+		<node id="1" name="Select Rows" qualified_name="Orange.widgets.data.owselectrows.OWSelectRows" project_name="Orange3" version="" title="① 필터 (사이드바 대응)" position="330, 430" />
+		<node id="2" name="Data Info" qualified_name="Orange.widgets.data.owdatainfo.OWDataInfo" project_name="Orange3" version="" title="② KPI — 건수" position="570, 120" />
+		<node id="3" name="Pivot Table" qualified_name="Orange.widgets.data.owpivot.OWPivot" project_name="Orange3" version="" title="③ KPI — 유형별 재고장률" position="570, 220" />
+		<node id="4" name="Bar Plot" qualified_name="Orange.widgets.visualize.owbarplot.OWBarPlot" project_name="Orange3" version="" title="④ 재고장률 막대" position="800, 220" />
+		<node id="5" name="Box Plot" qualified_name="Orange.widgets.visualize.owboxplot.OWBoxPlot" project_name="Orange3" version="" title="⑤ 유형별 정비비용 분포" position="570, 340" />
+		<node id="6" name="Distributions" qualified_name="Orange.widgets.visualize.owdistributions.OWDistributions" project_name="Orange3" version="" title="⑥ 월별 정비 건수 추이" position="570, 440" />
+		<node id="7" name="Violin Plot" qualified_name="Orange.widgets.visualize.owviolinplot.OWViolinPlot" project_name="Orange3" version="" title="⑦ 가동중단 분포(바이올린)" position="570, 540" />
+		<node id="8" name="Group by" qualified_name="Orange.widgets.data.owgroupby.OWGroupBy" project_name="Orange3" version="" title="⑧ 부대별 집계" position="570, 640" />
+		<node id="9" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="⑨ 집계 결과" position="800, 640" />
+		<node id="10" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="⑩ 필터된 원자료" position="570, 740" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Matching Data" sink_channel="Data" enabled="true" source_channel_id="matching_data" sink_channel_id="data" />
+		<link id="2" source_node_id="1" sink_node_id="3" source_channel="Matching Data" sink_channel="Data" enabled="true" source_channel_id="matching_data" sink_channel_id="data" />
+		<link id="3" source_node_id="1" sink_node_id="5" source_channel="Matching Data" sink_channel="Data" enabled="true" source_channel_id="matching_data" sink_channel_id="data" />
+		<link id="4" source_node_id="1" sink_node_id="6" source_channel="Matching Data" sink_channel="Data" enabled="true" source_channel_id="matching_data" sink_channel_id="data" />
+		<link id="5" source_node_id="1" sink_node_id="7" source_channel="Matching Data" sink_channel="Data" enabled="true" source_channel_id="matching_data" sink_channel_id="data" />
+		<link id="6" source_node_id="1" sink_node_id="8" source_channel="Matching Data" sink_channel="Data" enabled="true" source_channel_id="matching_data" sink_channel_id="data" />
+		<link id="7" source_node_id="1" sink_node_id="10" source_channel="Matching Data" sink_channel="Data" enabled="true" source_channel_id="matching_data" sink_channel_id="data" />
+		<link id="8" source_node_id="3" sink_node_id="4" source_channel="Grouped Data" sink_channel="Data" enabled="true" source_channel_id="grouped_data" sink_channel_id="data" />
+		<link id="9" source_node_id="8" sink_node_id="9" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+	</links>
+	<annotations>
+		<text id="0" type="text/plain" rect="(40, 20, 700, 130)" font-family="Helvetica" font-size="14">[실습 2] 분석 대시보드  ·  실습지 문제 2-1
+
+Streamlit 대시보드의 구성요소를 Orange 위젯으로 1:1 대응시켰다.
+  사이드바 필터 → Select Rows      |  KPI 카드      → Data Info · Pivot Table
+  막대/박스 차트 → Bar Plot·Box Plot |  월별 추이 라인 → Distributions(시간축)
+Select Rows 에서 조건을 바꾸면 아래 모든 위젯이 즉시 갱신된다 = 필터 UI.</text>
+		<text id="1" type="text/plain" rect="(120, 520, 320, 110)" font-family="Helvetica" font-size="11">문제 2-1 ① · 조건 두 개를 추가한다.
+  equipment_type  is one of  (원하는 유형)
+  severity        is between 0 and 5
+조건을 바꿀 때마다 오른쪽 위젯이 모두 갱신 →
+Streamlit 의 st.multiselect / st.slider 와 같은 역할.</text>
+		<text id="2" type="text/plain" rect="(720, 95, 320, 60)" font-family="Helvetica" font-size="11">문제 2-1 ② · st.metric('정비 건수') 대응.
+필터 후 행 수가 바로 보인다.</text>
+		<text id="3" type="text/plain" rect="(950, 190, 340, 95)" font-family="Helvetica" font-size="11">문제 2-1 ②③ · Pivot Table 설정
+  Rows = equipment_type
+  Values = failure_within_30days
+  Aggregations = Mean
+→ Bar Plot 에서 Values 를 그 평균 컬럼으로 지정하면
+   '장비유형별 재고장률' 막대가 된다.</text>
+		<text id="4" type="text/plain" rect="(720, 315, 320, 60)" font-family="Helvetica" font-size="11">문제 2-1 ④ · Variable = maintenance_cost,
+Subgroups = equipment_type (px.box 대응).</text>
+		<text id="5" type="text/plain" rect="(720, 415, 340, 80)" font-family="Helvetica" font-size="11">문제 2-1 ⑤ · Variable = maintenance_date (시간형).
+Bin width 를 월 단위로 늘리면 px.line 의 월별 추이와
+같은 그림이 된다. Split by = maintenance_type 도 시도.</text>
+		<text id="6" type="text/plain" rect="(720, 515, 320, 60)" font-family="Helvetica" font-size="11">심화 · Variable = downtime_hours,
+Subgroups = maintenance_type. 박스플롯보다 분포 모양이 잘 보인다.</text>
+		<text id="7" type="text/plain" rect="(950, 615, 330, 75)" font-family="Helvetica" font-size="11">심화 · Group by = unit_code,
+Aggregations 에서 failure_within_30days = Mean,
+maintenance_cost = Mean 을 체크.
+어느 부대의 재고장률이 가장 높은가?</text>
+		<text id="8" type="text/plain" rect="(720, 720, 320, 45)" font-family="Helvetica" font-size="11">문제 2-1 · st.dataframe(f.head(20)) 대응.</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASVawEAAAAAAAB9lCiMDHJlY2VudF9wYXRoc5RdlIweb3Jhbmdld2lkZ2V0LnV0aWxzLmZpbGVk
+aWFsb2dzlIwKUmVjZW50UGF0aJSTlCmBlH2UKIwHYWJzcGF0aJSMgi9Vc2Vycy9iZWdyZWF0L1RB
+RUVVTl9EQVRBL3dvcmtzcGFjZXMvMjAyNi1kYXRhZXhwZXJ0LzAyX2NsYXNzLzThhIvhhbXhhq/h
+hI7hhaEvbXktZWRhLWFwcC93b3JrZmxvdy9kYXRhL2VxdWlwbWVudF9tYWludGVuYW5jZS50YWKU
+jAZwcmVmaXiUjAdiYXNlZGlylIwHcmVscGF0aJSMHmRhdGEvZXF1aXBtZW50X21haW50ZW5hbmNl
+LnRhYpSMBXRpdGxllIwAlIwFc2hlZXSUaA+MC2ZpbGVfZm9ybWF0lE51YmGMBnNvdXJjZZRLAIwL
+c2hlZXRfbmFtZXOUfZSMC19fdmVyc2lvbl9flEsBdS4=
+</properties>
+		<properties node_id="1" format="literal">{'__version__': 2}</properties>
+		<properties node_id="2" format="literal">{'__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'__version__': 2}</properties>
+		<properties node_id="4" format="literal">{'__version__': 1}</properties>
+		<properties node_id="5" format="literal">{'__version__': 1}</properties>
+		<properties node_id="6" format="literal">{'__version__': 2}</properties>
+		<properties node_id="7" format="literal">{'__version__': 1}</properties>
+		<properties node_id="8" format="literal">{'__version__': 1}</properties>
+		<properties node_id="9" format="literal">{'__version__': 1}</properties>
+		<properties node_id="10" format="literal">{'__version__': 1}</properties>
+	</node_properties>
+</scheme>

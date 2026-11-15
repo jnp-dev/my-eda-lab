@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="07 · 모델 저장과 예측 앱" description="실습지 실습 4 (문제 4-1 ~ 4-3) · 저장/로드 + 실시간 예측 + 결과 기록">
+	<nodes>
+		<node id="0" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="장비 정비이력" position="120, 330" />
+		<node id="1" name="Impute" qualified_name="Orange.widgets.data.owimpute.OWImpute" project_name="Orange3" version="" title="결측 처리 (1-6)" position="290, 330" />
+		<node id="2" name="Purge Domain" qualified_name="Orange.widgets.data.owpurgedomain.OWPurgeDomain" project_name="Orange3" version="" title="도메인 정리" position="450, 330" />
+		<node id="3" name="Select Columns" qualified_name="Orange.widgets.data.owselectcolumns.OWSelectAttributes" project_name="Orange3" version="" title="누수 컬럼 선택 (3-1)" position="610, 330" />
+		<node id="4" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="Train — 그룹 분할" position="800, 220" />
+		<node id="5" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="Test — 그룹 분할" position="800, 440" />
+		<node id="6" name="Gradient Boosting" qualified_name="Orange.widgets.model.owgradientboosting.OWGradientBoosting" project_name="Orange3" version="" title="Gradient Boosting" position="960, 220" />
+		<node id="7" name="Save Model" qualified_name="Orange.widgets.model.owsavemodel.OWSaveModel" project_name="Orange3" version="" title="① 모델 저장 (4-1)" position="1180, 220" />
+		<node id="8" name="Load Model" qualified_name="Orange.widgets.model.owloadmodel.OWLoadModel" project_name="Orange3" version="" title="② 모델 불러오기" position="300, 720" />
+		<node id="9" name="Create Instance" qualified_name="Orange.widgets.data.owcreateinstance.OWCreateInstance" project_name="Orange3" version="" title="③ 입력 폼 (4-2)" position="300, 880" />
+		<node id="10" name="Predictions" qualified_name="Orange.widgets.evaluate.owpredictions.OWPredictions" project_name="Orange3" version="" title="④ 예측 결과" position="560, 800" />
+		<node id="11" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="⑤ 결과 보기" position="780, 800" />
+		<node id="12" name="Save Data" qualified_name="Orange.widgets.data.owsave.OWSave" project_name="Orange3" version="" title="⑥ predictions.csv 기록 (4-3)" position="780, 920" />
+		<node id="13" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="신규 정비건 5건" position="300, 1180" />
+		<node id="14" name="Predictions" qualified_name="Orange.widgets.evaluate.owpredictions.OWPredictions" project_name="Orange3" version="" title="⑦ 배치 예측" position="560, 1180" />
+		<node id="15" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="⑧ 배치 결과" position="780, 1180" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="2" source_node_id="2" sink_node_id="3" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="3" source_node_id="3" sink_node_id="4" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="4" source_node_id="3" sink_node_id="5" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="5" source_node_id="4" sink_node_id="6" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="6" source_node_id="6" sink_node_id="7" source_channel="Model" sink_channel="Model" enabled="true" source_channel_id="model" sink_channel_id="model" />
+		<link id="7" source_node_id="0" sink_node_id="9" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="8" source_node_id="9" sink_node_id="10" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="9" source_node_id="8" sink_node_id="10" source_channel="Model" sink_channel="Predictors" enabled="true" source_channel_id="model" sink_channel_id="predictors" />
+		<link id="10" source_node_id="10" sink_node_id="11" source_channel="Predictions" sink_channel="Data" enabled="true" source_channel_id="annotated" sink_channel_id="data" />
+		<link id="11" source_node_id="10" sink_node_id="12" source_channel="Predictions" sink_channel="Data" enabled="true" source_channel_id="annotated" sink_channel_id="data" />
+		<link id="12" source_node_id="13" sink_node_id="14" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="13" source_node_id="8" sink_node_id="14" source_channel="Model" sink_channel="Predictors" enabled="true" source_channel_id="model" sink_channel_id="predictors" />
+		<link id="14" source_node_id="14" sink_node_id="15" source_channel="Predictions" sink_channel="Data" enabled="true" source_channel_id="annotated" sink_channel_id="data" />
+	</links>
+	<annotations>
+		<text id="0" type="text/plain" rect="(40, 20, 820, 150)" font-family="Helvetica" font-size="14">[실습 4] 예측 앱 제작 및 자동화  ·  실습지 문제 4-1 ~ 4-3
+
+두 단계로 나뉜다.
+  A. 모델 저장 (위쪽 줄)  — joblib.dump(best_model, 'artifacts/model.pkl') 대응
+     학습 → Save Model 로 artifacts/model.pkcls 를 만든다. 먼저 한 번 실행해 두어야
+     아래 Load Model 이 파일을 찾는다.
+  B. 예측 앱 (아래쪽 줄) — predict_app.py 대응
+     Create Instance = Streamlit 입력 폼, Predictions = 예측 결과 화면,
+     Save Data = predictions.csv 누적 기록.</text>
+		<text id="1" type="text/plain" rect="(50, 390, 330, 105)" font-family="Helvetica" font-size="11">문제 1-6 · Impute + Purge Domain (두 개가 한 세트)
+Impute 의 Default method = "As a distinct value"
+  → 결측이 곧 '예방정비'라는 신호를 보존한다.
+Purge Domain 은 그때 딸려 나오는 빈 범주·상수 컬럼을 정리한다.
+이 두 개를 거치면 피처가 정확히 16개가 된다.</text>
+		<text id="2" type="text/plain" rect="(520, 420, 300, 110)" font-family="Helvetica" font-size="11">문제 3-1 · 데이터 누수(leakage) 스위치
+Select Columns 를 열고 아래 4개를 Features → Ignored 로 옮기면
+실습지의 EXCLUDE_LEAKAGE = True 와 같다.
+  fault_code · fault_category · severity · maintenance_success
+(모두 '고장이 난 뒤에야 아는 사후 정보')
+먼저 포함한 채로 돌리고, 다음에 제외해서 점수 차이를 비교한다.</text>
+		<text id="3" type="text/plain" rect="(770, 100, 340, 110)" font-family="Helvetica" font-size="11">문제 3-1 ⭐ 가장 중요 · 그룹 분할
+Orange 의 Data Sampler 에는 그룹 분할이 없다.
+두 Python Script 가 GroupShuffleSplit(test_size=0.2,
+random_state=42) 을 같은 시드로 돌려 Train/Test 를
+각각 내보낸다. 위젯을 열고 Run(⌘R/Ctrl+R) 한 번씩.</text>
+		<text id="4" type="text/plain" rect="(1180, 120, 400, 85)" font-family="Helvetica" font-size="11">문제 4-1 · Save Model 을 열고 Save As... →
+workflow/artifacts/model.pkcls 로 저장한다.
+Orange 는 전처리(원-핫·스케일링)까지 모델 안에 함께 저장하므로
+실습지의 model.pkl + schema.pkl 을 한 파일이 대신한다.</text>
+		<text id="5" type="text/plain" rect="(60, 990, 460, 130)" font-family="Helvetica" font-size="11">문제 4-2 ⭐ · Create Instance = Streamlit 입력 폼.
+· 위젯을 열면 피처마다 입력칸이 자동 생성된다 (스키마로 폼 자동 생성 대응)
+· 초기값 버튼에서 Median 을 고른다 → 실습지의 '기본값 = 학습 데이터 중앙값'.
+  0.0 으로 두면 현실에 없는 장비를 예측하게 된다.
+· 값을 바꾸면 오른쪽 Predictions 의 확률이 즉시 갱신된다.
+문제 4-2 생각해보기 — 확률을 그대로 쓰지 않고 임계값으로 0/1 을 나누는 이유는?</text>
+		<text id="6" type="text/plain" rect="(560, 630, 420, 130)" font-family="Helvetica" font-size="11">문제 4-2 · Predictions 위젯
+· 오른쪽 'Show probabilities' 를 켜면 재고장 확률(%)이 보인다.
+· Orange 의 기본 판정은 0.5 다. 실습지처럼 튜닝 임계값(예 0.44)으로
+  판정하려면 05 워크플로우의 Calibrated Learner(Threshold = Optimize F1)
+  로 학습한 모델을 저장해서 여기에 불러온다.
+문제 4-3 · Save Data 로 결과를 reports/predictions.csv 에 저장한다.</text>
+		<text id="7" type="text/plain" rect="(300, 1290, 500, 95)" font-family="Helvetica" font-size="11">심화 · 한 건씩이 아니라 파일 단위로 예측하는 경로.
+data/equipment_new_input.tab 은 타깃을 '?' 로 비운 신규 5건이다.
+현장에서는 이 자리에 '오늘 들어온 정비 요청' 파일을 물리면 된다.
+결과를 Save Data 로 내보내면 predictions.csv 누적 기록이 된다.</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASVawEAAAAAAAB9lCiMDHJlY2VudF9wYXRoc5RdlIweb3Jhbmdld2lkZ2V0LnV0aWxzLmZpbGVk
+aWFsb2dzlIwKUmVjZW50UGF0aJSTlCmBlH2UKIwHYWJzcGF0aJSMgi9Vc2Vycy9iZWdyZWF0L1RB
+RUVVTl9EQVRBL3dvcmtzcGFjZXMvMjAyNi1kYXRhZXhwZXJ0LzAyX2NsYXNzLzThhIvhhbXhhq/h
+hI7hhaEvbXktZWRhLWFwcC93b3JrZmxvdy9kYXRhL2VxdWlwbWVudF9tYWludGVuYW5jZS50YWKU
+jAZwcmVmaXiUjAdiYXNlZGlylIwHcmVscGF0aJSMHmRhdGEvZXF1aXBtZW50X21haW50ZW5hbmNl
+LnRhYpSMBXRpdGxllIwAlIwFc2hlZXSUaA+MC2ZpbGVfZm9ybWF0lE51YmGMBnNvdXJjZZRLAIwL
+c2hlZXRfbmFtZXOUfZSMC19fdmVyc2lvbl9flEsBdS4=
+</properties>
+		<properties node_id="1" format="literal">{'_default_method_index': 3, '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'__version__': 1}</properties>
+		<properties node_id="4" format="literal">{'scriptLibrary': [{'name': '실습 코드', 'script': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "train"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'filename': None}], 'currentScriptIndex': 0, 'scriptText': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "train"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'splitterState': None, 'vimModeEnabled': False, '__version__': 2}</properties>
+		<properties node_id="5" format="literal">{'scriptLibrary': [{'name': '실습 코드', 'script': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "test"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'filename': None}], 'currentScriptIndex': 0, 'scriptText': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "test"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'splitterState': None, 'vimModeEnabled': False, '__version__': 2}</properties>
+		<properties node_id="6" format="literal">{'__version__': 1}</properties>
+		<properties node_id="7" format="literal">{'filter': 'Pickled model (*.pkcls)', 'stored_path': '/Users/begreat/TAEEUN_DATA/workspaces/2026-dataexpert/02_class/4일차/my-eda-app/workflow/artifacts', 'stored_name': 'model.pkcls', 'auto_save': False, '__version__': 1}</properties>
+		<properties node_id="8" format="literal">{'__version__': 1}</properties>
+		<properties node_id="9" format="literal">{'__version__': 1}</properties>
+		<properties node_id="10" format="literal">{'__version__': 3}</properties>
+		<properties node_id="11" format="literal">{'__version__': 1}</properties>
+		<properties node_id="12" format="literal">{'filter': 'Comma-separated values (*.csv)', 'stored_path': '/Users/begreat/TAEEUN_DATA/workspaces/2026-dataexpert/02_class/4일차/my-eda-app/workflow/reports', 'stored_name': 'predictions.csv', 'add_type_annotations': False, 'auto_save': False, '__version__': 3}</properties>
+		<properties node_id="13" format="pickle">gASVZwEAAAAAAAB9lCiMDHJlY2VudF9wYXRoc5RdlIweb3Jhbmdld2lkZ2V0LnV0aWxzLmZpbGVk
+aWFsb2dzlIwKUmVjZW50UGF0aJSTlCmBlH2UKIwHYWJzcGF0aJSMgC9Vc2Vycy9iZWdyZWF0L1RB
+RUVVTl9EQVRBL3dvcmtzcGFjZXMvMjAyNi1kYXRhZXhwZXJ0LzAyX2NsYXNzLzThhIvhhbXhhq/h
+hI7hhaEvbXktZWRhLWFwcC93b3JrZmxvdy9kYXRhL2VxdWlwbWVudF9uZXdfaW5wdXQudGFilIwG
+cHJlZml4lIwHYmFzZWRpcpSMB3JlbHBhdGiUjBxkYXRhL2VxdWlwbWVudF9uZXdfaW5wdXQudGFi
+lIwFdGl0bGWUjACUjAVzaGVldJRoD4wLZmlsZV9mb3JtYXSUTnViYYwGc291cmNllEsAjAtzaGVl
+dF9uYW1lc5R9lIwLX192ZXJzaW9uX1+USwF1Lg==
+</properties>
+		<properties node_id="14" format="literal">{'__version__': 3}</properties>
+		<properties node_id="15" format="literal">{'__version__': 1}</properties>
+	</node_properties>
+</scheme>

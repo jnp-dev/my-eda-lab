@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="03 · 데이터 분할 (그룹 누수 차단)" description="실습지 문제 3-1 · GroupShuffleSplit 대 무작위 분할">
+	<nodes>
+		<node id="0" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="장비 정비이력" position="120, 400" />
+		<node id="1" name="Impute" qualified_name="Orange.widgets.data.owimpute.OWImpute" project_name="Orange3" version="" title="결측 처리 (1-6)" position="290, 400" />
+		<node id="2" name="Purge Domain" qualified_name="Orange.widgets.data.owpurgedomain.OWPurgeDomain" project_name="Orange3" version="" title="도메인 정리" position="450, 400" />
+		<node id="3" name="Select Columns" qualified_name="Orange.widgets.data.owselectcolumns.OWSelectAttributes" project_name="Orange3" version="" title="누수 컬럼 선택 (3-1)" position="610, 400" />
+		<node id="4" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="Train — 그룹 분할" position="800, 290" />
+		<node id="5" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="Test — 그룹 분할" position="800, 510" />
+		<node id="6" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="중복 장비 검증 (=0)" position="1010, 400" />
+		<node id="7" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Train 확인" position="960, 200" />
+		<node id="8" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Test 확인" position="960, 520" />
+		<node id="9" name="Distributions" qualified_name="Orange.widgets.visualize.owdistributions.OWDistributions" project_name="Orange3" version="" title="Train 타깃 분포" position="1150, 290" />
+		<node id="10" name="Distributions" qualified_name="Orange.widgets.visualize.owdistributions.OWDistributions" project_name="Orange3" version="" title="Test 타깃 분포" position="1150, 430" />
+		<node id="11" name="Data Sampler" qualified_name="Orange.widgets.data.owdatasampler.OWDataSampler" project_name="Orange3" version="" title="❌ 무작위 분할 (함정)" position="500, 700" />
+		<node id="12" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="무작위 Train" position="720, 700" />
+		<node id="13" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="무작위 Test" position="720, 810" />
+		<node id="14" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="결측이 정보인지 확인 (3-6)" position="500, 990" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="2" source_node_id="2" sink_node_id="3" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="3" source_node_id="3" sink_node_id="4" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="4" source_node_id="3" sink_node_id="5" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="5" source_node_id="4" sink_node_id="6" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="6" source_node_id="5" sink_node_id="6" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="7" source_node_id="4" sink_node_id="7" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="8" source_node_id="5" sink_node_id="8" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="9" source_node_id="4" sink_node_id="9" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="10" source_node_id="5" sink_node_id="10" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="11" source_node_id="3" sink_node_id="11" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="12" source_node_id="11" sink_node_id="12" source_channel="Data Sample" sink_channel="Data" enabled="true" source_channel_id="data_sample" sink_channel_id="data" />
+		<link id="13" source_node_id="11" sink_node_id="13" source_channel="Remaining Data" sink_channel="Data" enabled="true" source_channel_id="remaining_data" sink_channel_id="data" />
+		<link id="14" source_node_id="0" sink_node_id="14" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+	</links>
+	<annotations>
+		<text id="0" type="text/plain" rect="(40, 20, 720, 120)" font-family="Helvetica" font-size="14">[실습 3-1] ⭐ 가장 중요한 단계  ·  실습지 문제 3-1
+
+장비 1대당 정비이력이 여러 건이다. 무작위로 섞으면 같은 장비가 train/test 양쪽에
+들어가 모델이 그 장비를 "외워서" 맞힌다(그룹 누수). 아래 두 갈래를 모두 돌려
+'중복 장비 수'와 나중 워크플로우의 점수 차이를 직접 비교하라.</text>
+		<text id="1" type="text/plain" rect="(50, 460, 330, 105)" font-family="Helvetica" font-size="11">문제 1-6 · Impute + Purge Domain (두 개가 한 세트)
+Impute 의 Default method = "As a distinct value"
+  → 결측이 곧 '예방정비'라는 신호를 보존한다.
+Purge Domain 은 그때 딸려 나오는 빈 범주·상수 컬럼을 정리한다.
+이 두 개를 거치면 피처가 정확히 16개가 된다.</text>
+		<text id="2" type="text/plain" rect="(520, 490, 300, 110)" font-family="Helvetica" font-size="11">문제 3-1 · 데이터 누수(leakage) 스위치
+Select Columns 를 열고 아래 4개를 Features → Ignored 로 옮기면
+실습지의 EXCLUDE_LEAKAGE = True 와 같다.
+  fault_code · fault_category · severity · maintenance_success
+(모두 '고장이 난 뒤에야 아는 사후 정보')
+먼저 포함한 채로 돌리고, 다음에 제외해서 점수 차이를 비교한다.</text>
+		<text id="3" type="text/plain" rect="(770, 170, 340, 110)" font-family="Helvetica" font-size="11">문제 3-1 ⭐ 가장 중요 · 그룹 분할
+Orange 의 Data Sampler 에는 그룹 분할이 없다.
+두 Python Script 가 GroupShuffleSplit(test_size=0.2,
+random_state=42) 을 같은 시드로 돌려 Train/Test 를
+각각 내보낸다. 위젯을 열고 Run(⌘R/Ctrl+R) 한 번씩.</text>
+		<text id="4" type="text/plain" rect="(1080, 100, 330, 90)" font-family="Helvetica" font-size="11">✅ 기대 출력
+  X_train 약 4,031행 / X_test 약 969행
+  중복 장비 수 = 0
+  train·test 재고장 비율 모두 약 0.19</text>
+		<text id="5" type="text/plain" rect="(400, 870, 480, 105)" font-family="Helvetica" font-size="11">문제 3-1 (도전) · Data Sampler = 실습지의 train_test_split.
+Fixed proportion 80% + Stratify 로 설정하면 '무작위 분할'이 된다.
+이 두 출력을 04 워크플로우의 Test and Score 에 물려 AUC 를 비교해 보라.
+무작위 쪽이 더 높게 나오는데 — 그게 왜 '함정'인가?</text>
+		<text id="6" type="text/plain" rect="(700, 990, 480, 90)" font-family="Helvetica" font-size="11">문제 3-6 · 예방정비 결측치 전략.
+Run 하면 'fault_code 결측 &lt;=&gt; 예방정비 = True' 와
+결측/비결측 재고장률(약 0.141 vs 0.231)이 나온다.
+→ 결측 자체가 신호이므로 최빈값 대체는 거짓 정보 주입이다.</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASVawEAAAAAAAB9lCiMDHJlY2VudF9wYXRoc5RdlIweb3Jhbmdld2lkZ2V0LnV0aWxzLmZpbGVk
+aWFsb2dzlIwKUmVjZW50UGF0aJSTlCmBlH2UKIwHYWJzcGF0aJSMgi9Vc2Vycy9iZWdyZWF0L1RB
+RUVVTl9EQVRBL3dvcmtzcGFjZXMvMjAyNi1kYXRhZXhwZXJ0LzAyX2NsYXNzLzThhIvhhbXhhq/h
+hI7hhaEvbXktZWRhLWFwcC93b3JrZmxvdy9kYXRhL2VxdWlwbWVudF9tYWludGVuYW5jZS50YWKU
+jAZwcmVmaXiUjAdiYXNlZGlylIwHcmVscGF0aJSMHmRhdGEvZXF1aXBtZW50X21haW50ZW5hbmNl
+LnRhYpSMBXRpdGxllIwAlIwFc2hlZXSUaA+MC2ZpbGVfZm9ybWF0lE51YmGMBnNvdXJjZZRLAIwL
+c2hlZXRfbmFtZXOUfZSMC19fdmVyc2lvbl9flEsBdS4=
+</properties>
+		<properties node_id="1" format="literal">{'_default_method_index': 3, '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'__version__': 1}</properties>
+		<properties node_id="4" format="literal">{'scriptLibrary': [{'name': '실습 코드', 'script': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "train"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'filename': None}], 'currentScriptIndex': 0, 'scriptText': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "train"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'splitterState': None, 'vimModeEnabled': False, '__version__': 2}</properties>
+		<properties node_id="5" format="literal">{'scriptLibrary': [{'name': '실습 코드', 'script': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "test"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'filename': None}], 'currentScriptIndex': 0, 'scriptText': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "test"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'splitterState': None, 'vimModeEnabled': False, '__version__': 2}</properties>
+		<properties node_id="6" format="literal">{'scriptLibrary': [{'name': '실습 코드', 'script': '# ── 실습지 문제 3-1 검증 · 중복 장비 수는 반드시 0 ────────────────────────────\n# Data 입력에 Train 스크립트 → Test 스크립트 순서로 두 개를 연결해 두었다.\nimport numpy as np\n\ntrain, test = in_datas[0], in_datas[1]\nids = lambda t: {str(v) for v in t.get_column("equipment_id")}\n\noverlap = ids(train) &amp; ids(test)\nprint("train :", len(train), "행 /", len(ids(train)), "대")\nprint("test  :", len(test), "행 /", len(ids(test)), "대")\nprint("중복 장비 수 =", len(overlap), "   &lt;-- 반드시 0")\nprint("재고장 비율  train %.3f / test %.3f"\n      % (np.nanmean(train.Y), np.nanmean(test.Y)))\n\nout_data = train\n', 'filename': None}], 'currentScriptIndex': 0, 'scriptText': '# ── 실습지 문제 3-1 검증 · 중복 장비 수는 반드시 0 ────────────────────────────\n# Data 입력에 Train 스크립트 → Test 스크립트 순서로 두 개를 연결해 두었다.\nimport numpy as np\n\ntrain, test = in_datas[0], in_datas[1]\nids = lambda t: {str(v) for v in t.get_column("equipment_id")}\n\noverlap = ids(train) &amp; ids(test)\nprint("train :", len(train), "행 /", len(ids(train)), "대")\nprint("test  :", len(test), "행 /", len(ids(test)), "대")\nprint("중복 장비 수 =", len(overlap), "   &lt;-- 반드시 0")\nprint("재고장 비율  train %.3f / test %.3f"\n      % (np.nanmean(train.Y), np.nanmean(test.Y)))\n\nout_data = train\n', 'splitterState': None, 'vimModeEnabled': False, '__version__': 2}</properties>
+		<properties node_id="7" format="literal">{'__version__': 1}</properties>
+		<properties node_id="8" format="literal">{'__version__': 1}</properties>
+		<properties node_id="9" format="literal">{'__version__': 2}</properties>
+		<properties node_id="10" format="literal">{'__version__': 2}</properties>
+		<properties node_id="11" format="literal">{'sampling_type': 0, 'sampleSizePercentage': 80, 'stratify': True, 'use_seed': True, '__version__': 2}</properties>
+		<properties node_id="12" format="literal">{'__version__': 1}</properties>
+		<properties node_id="13" format="literal">{'__version__': 1}</properties>
+		<properties node_id="14" format="literal">{'scriptLibrary': [{'name': '실습 코드', 'script': '# ── 실습지 문제 3-6 · 예방정비 결측이 "정보"인지 확인 ─────────────────────────\n# fault_code 결측은 무작위 결측이 아니라 "예방정비" 를 뜻하는 정보성 결측(MNAR).\nimport numpy as np\n\ndata = in_data\nmt = data.domain["maintenance_type"]\nfc = data.domain["fault_code"]\n\nis_prev = np.asarray(data.get_column(mt)) == mt.values.index("예방정비")\nmiss = np.isnan(np.asarray(data.get_column(fc), dtype=float))\n\nprint("fault_code 결측 &lt;=&gt; 예방정비 ?", bool(np.all(miss == is_prev)))\ny = data.Y\nprint("결측(예방정비) 재고장률 =", round(float(np.nanmean(y[miss])), 3))\nprint("비결측          재고장률 =", round(float(np.nanmean(y[~miss])), 3))\nprint()\nprint("→ 결측 자체가 신호다. 최빈값으로 채우면(mode_impute) 거짓 정보를 주입하는 것이고,")\nprint("  예방정비 행을 지우면(drop_rows) 평가 모집단 자체가 바뀐다.")\nprint("  Impute 위젯의 \'As a distinct value\' 가 실습지의 na_plus_flag 전략에 해당한다.")\n\nout_data = data\n', 'filename': None}], 'currentScriptIndex': 0, 'scriptText': '# ── 실습지 문제 3-6 · 예방정비 결측이 "정보"인지 확인 ─────────────────────────\n# fault_code 결측은 무작위 결측이 아니라 "예방정비" 를 뜻하는 정보성 결측(MNAR).\nimport numpy as np\n\ndata = in_data\nmt = data.domain["maintenance_type"]\nfc = data.domain["fault_code"]\n\nis_prev = np.asarray(data.get_column(mt)) == mt.values.index("예방정비")\nmiss = np.isnan(np.asarray(data.get_column(fc), dtype=float))\n\nprint("fault_code 결측 &lt;=&gt; 예방정비 ?", bool(np.all(miss == is_prev)))\ny = data.Y\nprint("결측(예방정비) 재고장률 =", round(float(np.nanmean(y[miss])), 3))\nprint("비결측          재고장률 =", round(float(np.nanmean(y[~miss])), 3))\nprint()\nprint("→ 결측 자체가 신호다. 최빈값으로 채우면(mode_impute) 거짓 정보를 주입하는 것이고,")\nprint("  예방정비 행을 지우면(drop_rows) 평가 모집단 자체가 바뀐다.")\nprint("  Impute 위젯의 \'As a distinct value\' 가 실습지의 na_plus_flag 전략에 해당한다.")\n\nout_data = data\n', 'splitterState': None, 'vimModeEnabled': False, '__version__': 2}</properties>
+	</node_properties>
+</scheme>

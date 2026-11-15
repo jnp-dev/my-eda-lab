@@ -1,0 +1,8 @@
+equipment_id	equipment_type	unit_code	equipment_age_years	maintenance_date	maintenance_type	fault_code	fault_category	severity	downtime_hours	repair_duration_hours	parts_replaced_count	maintenance_cost	maintenance_success	cumulative_operating_hours	days_since_last_maintenance	availability_rate	failure_within_30days	group_fold
+string	discrete	discrete	continuous	time	discrete	discrete	discrete	continuous	continuous	continuous	continuous	continuous	discrete	continuous	continuous	continuous	discrete	discrete
+meta				meta													class	meta
+EQ-0094	차량	UNIT-01	12.3	2023-11-17	사후정비	F026	전기	2	2.9	2.5	2	43	1	6198.2	1.0	0.833	?	4
+EQ-0122	차량	UNIT-09	19.6	2024-07-21	사후정비	F035	전기	1	41.6	4.9	5	13	1	7738.0	210.0	0.784	?	4
+EQ-0024	발전기	UNIT-07	9.2	2024-08-05	예방정비	?	?	0	1.1	2.5	0	40	1	6193.2	285.0	0.818	?	4
+EQ-0030	차량	UNIT-02	2.0	2023-08-19	사후정비	F025	통신	2	31.7	22.1	0	76	1	10927.9	1.0	0.839	?	3
+EQ-0115	통신장비	UNIT-03	13.3	2023-06-02	예방정비	?	?	0	2.6	0.7	1	47	1	10404.8	1.0	0.809	?	1

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="06 · 모델 해석 (SHAP 대응)" description="실습지 문제 3-5 · 피처 중요도와 단일 예측 근거">
+	<nodes>
+		<node id="0" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="장비 정비이력" position="120, 460" />
+		<node id="1" name="Impute" qualified_name="Orange.widgets.data.owimpute.OWImpute" project_name="Orange3" version="" title="결측 처리 (1-6)" position="290, 460" />
+		<node id="2" name="Purge Domain" qualified_name="Orange.widgets.data.owpurgedomain.OWPurgeDomain" project_name="Orange3" version="" title="도메인 정리" position="450, 460" />
+		<node id="3" name="Select Columns" qualified_name="Orange.widgets.data.owselectcolumns.OWSelectAttributes" project_name="Orange3" version="" title="누수 컬럼 선택 (3-1)" position="610, 460" />
+		<node id="4" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="Train — 그룹 분할" position="800, 350" />
+		<node id="5" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="Test — 그룹 분할" position="800, 570" />
+		<node id="6" name="Rank" qualified_name="Orange.widgets.data.owrank.OWRank" project_name="Orange3" version="" title="① 피처 중요도 순위" position="960, 300" />
+		<node id="7" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="순위 표" position="1180, 300" />
+		<node id="8" name="Random Forest" qualified_name="Orange.widgets.model.owrandomforest.OWRandomForest" project_name="Orange3" version="" title="Random Forest (점수기)" position="960, 180" />
+		<node id="9" name="Logistic Regression" qualified_name="Orange.widgets.model.owlogisticregression.OWLogisticRegression" project_name="Orange3" version="" title="Logistic Regression" position="960, 430" />
+		<node id="10" name="Nomogram" qualified_name="Orange.widgets.visualize.ownomogram.OWNomogram" project_name="Orange3" version="" title="② 예측 근거 (Nomogram)" position="1180, 430" />
+		<node id="11" name="Tree" qualified_name="Orange.widgets.model.owtree.OWTreeLearner" project_name="Orange3" version="" title="Decision Tree" position="960, 690" />
+		<node id="12" name="Tree Viewer" qualified_name="Orange.widgets.visualize.owtreeviewer.OWTreeGraph" project_name="Orange3" version="" title="③ 규칙 보기" position="1180, 690" />
+		<node id="13" name="Pythagorean Forest" qualified_name="Orange.widgets.visualize.owpythagoreanforest.OWPythagoreanForest" project_name="Orange3" version="" title="④ 숲 전체 보기" position="1180, 810" />
+		<node id="14" name="Box Plot" qualified_name="Orange.widgets.visualize.owboxplot.OWBoxPlot" project_name="Orange3" version="" title="⑤ 상위 피처 확인" position="960, 900" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="2" source_node_id="2" sink_node_id="3" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="3" source_node_id="3" sink_node_id="4" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="4" source_node_id="3" sink_node_id="5" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="5" source_node_id="4" sink_node_id="6" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="6" source_node_id="8" sink_node_id="6" source_channel="Learner" sink_channel="Scorer" enabled="true" source_channel_id="learner" sink_channel_id="scorer" />
+		<link id="7" source_node_id="6" sink_node_id="7" source_channel="Scores" sink_channel="Data" enabled="true" source_channel_id="scores" sink_channel_id="data" />
+		<link id="8" source_node_id="4" sink_node_id="9" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="9" source_node_id="9" sink_node_id="10" source_channel="Model" sink_channel="Classifier" enabled="true" source_channel_id="model" sink_channel_id="classifier" />
+		<link id="10" source_node_id="5" sink_node_id="10" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="11" source_node_id="4" sink_node_id="11" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="12" source_node_id="11" sink_node_id="12" source_channel="Model" sink_channel="Tree" enabled="true" source_channel_id="model" sink_channel_id="tree" />
+		<link id="13" source_node_id="8" sink_node_id="13" source_channel="Model" sink_channel="Random Forest" enabled="true" source_channel_id="model" sink_channel_id="random_forest" />
+		<link id="14" source_node_id="4" sink_node_id="14" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+	</links>
+	<annotations>
+		<text id="0" type="text/plain" rect="(40, 20, 800, 155)" font-family="Helvetica" font-size="14">[실습 3-5] 모델 해석  ·  실습지 문제 3-5
+
+기본 Orange 에는 SHAP 위젯이 없다. 실습지의 세 그림을 이렇게 대응시킨다.
+  bar (평균 |SHAP|)  → Rank        : 여러 점수로 피처 순위를 매긴다
+  summary(beeswarm)  → Nomogram    : 피처가 예측을 어느 방향으로 미는지 한눈에
+  waterfall(단일 샘플) → Nomogram + Data : 한 건을 골라 기여도를 읽는다
+  트리 구조 확인      → Tree Viewer · Pythagorean Forest
+
+진짜 SHAP 을 쓰려면 Options ▸ Add-ons 에서 'Explain' 애드온을 설치하면
+Explain Model / Explain Prediction 위젯이 생긴다 (README 참고).</text>
+		<text id="1" type="text/plain" rect="(50, 520, 330, 105)" font-family="Helvetica" font-size="11">문제 1-6 · Impute + Purge Domain (두 개가 한 세트)
+Impute 의 Default method = "As a distinct value"
+  → 결측이 곧 '예방정비'라는 신호를 보존한다.
+Purge Domain 은 그때 딸려 나오는 빈 범주·상수 컬럼을 정리한다.
+이 두 개를 거치면 피처가 정확히 16개가 된다.</text>
+		<text id="2" type="text/plain" rect="(520, 550, 300, 110)" font-family="Helvetica" font-size="11">문제 3-1 · 데이터 누수(leakage) 스위치
+Select Columns 를 열고 아래 4개를 Features → Ignored 로 옮기면
+실습지의 EXCLUDE_LEAKAGE = True 와 같다.
+  fault_code · fault_category · severity · maintenance_success
+(모두 '고장이 난 뒤에야 아는 사후 정보')
+먼저 포함한 채로 돌리고, 다음에 제외해서 점수 차이를 비교한다.</text>
+		<text id="3" type="text/plain" rect="(770, 230, 340, 110)" font-family="Helvetica" font-size="11">문제 3-1 ⭐ 가장 중요 · 그룹 분할
+Orange 의 Data Sampler 에는 그룹 분할이 없다.
+두 Python Script 가 GroupShuffleSplit(test_size=0.2,
+random_state=42) 을 같은 시드로 돌려 Train/Test 를
+각각 내보낸다. 위젯을 열고 Run(⌘R/Ctrl+R) 한 번씩.</text>
+		<text id="4" type="text/plain" rect="(1180, 170, 380, 110)" font-family="Helvetica" font-size="11">문제 3-5 ① · Rank 는 Information Gain, Gini, ANOVA, χ² 등
+여러 기준의 중요도를 한 표에 보여준다.
+Random Forest 를 Scorer 로 물리면 트리 기반 중요도 열이 추가된다.
+✅ 상위에 severity · maintenance_success 가 오면
+   그건 '고장 뒤에야 아는 정보'(누수 의심)라는 신호다.</text>
+		<text id="5" type="text/plain" rect="(1180, 520, 400, 120)" font-family="Helvetica" font-size="11">문제 3-5 ② · Nomogram = SHAP waterfall 대응.
+· 막대가 길수록 그 피처가 재고장 확률을 크게 민다(= |SHAP| 큼)
+· 오른쪽으로 갈수록 위험을 올리는 방향, 왼쪽이면 낮추는 방향
+· 아래 Data(Test) 를 연결해 두었으니 인스턴스를 하나 고르면
+  '이 건은 왜 위험으로 예측됐나' 를 그대로 읽을 수 있다.</text>
+		<text id="6" type="text/plain" rect="(1400, 690, 360, 100)" font-family="Helvetica" font-size="11">③④ 트리 계열 해석.
+Tree Viewer 는 '어떤 조건에서 재고장 확률이 높아지는가'를
+규칙으로 보여주고, Pythagorean Forest 는 숲 전체의
+트리 모양을 한 화면에 늘어놓아 다양성을 보여준다.</text>
+		<text id="7" type="text/plain" rect="(1180, 900, 380, 80)" font-family="Helvetica" font-size="11">⑤ Rank 상위 피처를 Variable 로, failure_within_30days 를
+Subgroups 로 놓아 재고장 여부에 따라 분포가 실제로
+갈리는지 확인한다. 실습 1 의 상관계수와 비교해 보라
+— 상관이 약했던 변수가 상위에 오를 수 있다.</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASVawEAAAAAAAB9lCiMDHJlY2VudF9wYXRoc5RdlIweb3Jhbmdld2lkZ2V0LnV0aWxzLmZpbGVk
+aWFsb2dzlIwKUmVjZW50UGF0aJSTlCmBlH2UKIwHYWJzcGF0aJSMgi9Vc2Vycy9iZWdyZWF0L1RB
+RUVVTl9EQVRBL3dvcmtzcGFjZXMvMjAyNi1kYXRhZXhwZXJ0LzAyX2NsYXNzLzThhIvhhbXhhq/h
+hI7hhaEvbXktZWRhLWFwcC93b3JrZmxvdy9kYXRhL2VxdWlwbWVudF9tYWludGVuYW5jZS50YWKU
+jAZwcmVmaXiUjAdiYXNlZGlylIwHcmVscGF0aJSMHmRhdGEvZXF1aXBtZW50X21haW50ZW5hbmNl
+LnRhYpSMBXRpdGxllIwAlIwFc2hlZXSUaA+MC2ZpbGVfZm9ybWF0lE51YmGMBnNvdXJjZZRLAIwL
+c2hlZXRfbmFtZXOUfZSMC19fdmVyc2lvbl9flEsBdS4=
+</properties>
+		<properties node_id="1" format="literal">{'_default_method_index': 3, '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'__version__': 1}</properties>
+		<properties node_id="4" format="literal">{'scriptLibrary': [{'name': '실습 코드', 'script': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "train"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'filename': None}], 'currentScriptIndex': 0, 'scriptText': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "train"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'splitterState': None, 'vimModeEnabled': False, '__version__': 2}</properties>
+		<properties node_id="5" format="literal">{'scriptLibrary': [{'name': '실습 코드', 'script': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "test"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'filename': None}], 'currentScriptIndex': 0, 'scriptText': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "test"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'splitterState': None, 'vimModeEnabled': False, '__version__': 2}</properties>
+		<properties node_id="6" format="literal">{'__version__': 4}</properties>
+		<properties node_id="7" format="literal">{'__version__': 1}</properties>
+		<properties node_id="8" format="literal">{'n_estimators': 100, 'class_weight': True, 'use_random_state': True, '__version__': 1}</properties>
+		<properties node_id="9" format="literal">{'class_weight': True, '__version__': 2}</properties>
+		<properties node_id="10" format="literal">{'__version__': 1}</properties>
+		<properties node_id="11" format="literal">{'__version__': 1}</properties>
+		<properties node_id="12" format="literal">{'__version__': 1}</properties>
+		<properties node_id="13" format="literal">{'__version__': 2}</properties>
+		<properties node_id="14" format="literal">{'__version__': 1}</properties>
+	</node_properties>
+</scheme>

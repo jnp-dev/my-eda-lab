@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="04 · 다중 모델 비교 (불균형 대응)" description="실습지 문제 3-2 · 베이스라인 + 불균형 보정 + 그룹 CV">
+	<nodes>
+		<node id="0" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="장비 정비이력" position="120, 430" />
+		<node id="1" name="Impute" qualified_name="Orange.widgets.data.owimpute.OWImpute" project_name="Orange3" version="" title="결측 처리 (1-6)" position="290, 430" />
+		<node id="2" name="Purge Domain" qualified_name="Orange.widgets.data.owpurgedomain.OWPurgeDomain" project_name="Orange3" version="" title="도메인 정리" position="450, 430" />
+		<node id="3" name="Select Columns" qualified_name="Orange.widgets.data.owselectcolumns.OWSelectAttributes" project_name="Orange3" version="" title="누수 컬럼 선택 (3-1)" position="610, 430" />
+		<node id="4" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="Train — 그룹 분할" position="800, 320" />
+		<node id="5" name="Python Script" qualified_name="Orange.widgets.data.owpythonscript.OWPythonScript" project_name="Orange3" version="" title="Test — 그룹 분할" position="800, 540" />
+		<node id="6" name="Constant" qualified_name="Orange.widgets.model.owconstant.OWConstant" project_name="Orange3" version="" title="Dummy (베이스라인)" position="960, 130" />
+		<node id="7" name="Logistic Regression" qualified_name="Orange.widgets.model.owlogisticregression.OWLogisticRegression" project_name="Orange3" version="" title="Logistic (불균형 보정)" position="960, 225" />
+		<node id="8" name="Naive Bayes" qualified_name="Orange.widgets.model.ownaivebayes.OWNaiveBayes" project_name="Orange3" version="" title="Naive Bayes" position="960, 320" />
+		<node id="9" name="Tree" qualified_name="Orange.widgets.model.owtree.OWTreeLearner" project_name="Orange3" version="" title="Decision Tree" position="960, 415" />
+		<node id="10" name="Random Forest" qualified_name="Orange.widgets.model.owrandomforest.OWRandomForest" project_name="Orange3" version="" title="Random Forest (보정)" position="960, 510" />
+		<node id="11" name="Gradient Boosting" qualified_name="Orange.widgets.model.owgradientboosting.OWGradientBoosting" project_name="Orange3" version="" title="Gradient Boosting" position="960, 605" />
+		<node id="12" name="kNN" qualified_name="Orange.widgets.model.owknn.OWKNNLearner" project_name="Orange3" version="" title="kNN" position="960, 700" />
+		<node id="13" name="Test and Score" qualified_name="Orange.widgets.evaluate.owtestandscore.OWTestAndScore" project_name="Orange3" version="" title="Test and Score" position="1230, 430" />
+		<node id="14" name="Confusion Matrix" qualified_name="Orange.widgets.evaluate.owconfusionmatrix.OWConfusionMatrix" project_name="Orange3" version="" title="혼동행렬" position="1450, 200" />
+		<node id="15" name="ROC Analysis" qualified_name="Orange.widgets.evaluate.owrocanalysis.OWROCAnalysis" project_name="Orange3" version="" title="ROC 곡선" position="1450, 320" />
+		<node id="16" name="Performance Curve" qualified_name="Orange.widgets.evaluate.owliftcurve.OWLiftCurve" project_name="Orange3" version="" title="Performance Curve" position="1450, 440" />
+		<node id="17" name="Calibration Plot" qualified_name="Orange.widgets.evaluate.owcalibrationplot.OWCalibrationPlot" project_name="Orange3" version="" title="확률 보정 곡선" position="1450, 560" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="2" source_node_id="2" sink_node_id="3" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="3" source_node_id="3" sink_node_id="4" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="4" source_node_id="3" sink_node_id="5" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="5" source_node_id="4" sink_node_id="13" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="train_data" />
+		<link id="6" source_node_id="5" sink_node_id="13" source_channel="Data" sink_channel="Test Data" enabled="true" source_channel_id="data" sink_channel_id="test_data" />
+		<link id="7" source_node_id="6" sink_node_id="13" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
+		<link id="8" source_node_id="7" sink_node_id="13" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
+		<link id="9" source_node_id="8" sink_node_id="13" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
+		<link id="10" source_node_id="9" sink_node_id="13" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
+		<link id="11" source_node_id="10" sink_node_id="13" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
+		<link id="12" source_node_id="11" sink_node_id="13" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
+		<link id="13" source_node_id="12" sink_node_id="13" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
+		<link id="14" source_node_id="13" sink_node_id="14" source_channel="Evaluation Results" sink_channel="Evaluation Results" enabled="true" source_channel_id="evaluations_results" sink_channel_id="evaluation_results" />
+		<link id="15" source_node_id="13" sink_node_id="15" source_channel="Evaluation Results" sink_channel="Evaluation Results" enabled="true" source_channel_id="evaluations_results" sink_channel_id="evaluation_results" />
+		<link id="16" source_node_id="13" sink_node_id="16" source_channel="Evaluation Results" sink_channel="Evaluation Results" enabled="true" source_channel_id="evaluations_results" sink_channel_id="evaluation_results" />
+		<link id="17" source_node_id="13" sink_node_id="17" source_channel="Evaluation Results" sink_channel="Evaluation Results" enabled="true" source_channel_id="evaluations_results" sink_channel_id="evaluation_results" />
+	</links>
+	<annotations>
+		<text id="0" type="text/plain" rect="(40, 20, 780, 145)" font-family="Helvetica" font-size="14">[실습 3-2] 다중 모델 비교  ·  실습지 문제 3-2
+
+체크포인트 4가지
+  ① Constant = DummyClassifier(most_frequent) 베이스라인을 반드시 포함한다.
+  ② 불균형 보정 — Logistic Regression / Random Forest 의 'Balance class distribution' 체크.
+  ③ 주지표는 accuracy 가 아니라 AUC · Recall · F1. (Orange 에 PR-AUC 는 없어 AUC+Recall 로 본다)
+  ④ 검증 방식 — 아래 Test and Score 설정 안내 참고.</text>
+		<text id="1" type="text/plain" rect="(50, 490, 330, 105)" font-family="Helvetica" font-size="11">문제 1-6 · Impute + Purge Domain (두 개가 한 세트)
+Impute 의 Default method = "As a distinct value"
+  → 결측이 곧 '예방정비'라는 신호를 보존한다.
+Purge Domain 은 그때 딸려 나오는 빈 범주·상수 컬럼을 정리한다.
+이 두 개를 거치면 피처가 정확히 16개가 된다.</text>
+		<text id="2" type="text/plain" rect="(520, 520, 300, 110)" font-family="Helvetica" font-size="11">문제 3-1 · 데이터 누수(leakage) 스위치
+Select Columns 를 열고 아래 4개를 Features → Ignored 로 옮기면
+실습지의 EXCLUDE_LEAKAGE = True 와 같다.
+  fault_code · fault_category · severity · maintenance_success
+(모두 '고장이 난 뒤에야 아는 사후 정보')
+먼저 포함한 채로 돌리고, 다음에 제외해서 점수 차이를 비교한다.</text>
+		<text id="3" type="text/plain" rect="(770, 200, 340, 110)" font-family="Helvetica" font-size="11">문제 3-1 ⭐ 가장 중요 · 그룹 분할
+Orange 의 Data Sampler 에는 그룹 분할이 없다.
+두 Python Script 가 GroupShuffleSplit(test_size=0.2,
+random_state=42) 을 같은 시드로 돌려 Train/Test 를
+각각 내보낸다. 위젯을 열고 Run(⌘R/Ctrl+R) 한 번씩.</text>
+		<text id="4" type="text/plain" rect="(1130, 620, 420, 150)" font-family="Helvetica" font-size="11">문제 3-2 ④ · Test and Score 설정 — 두 가지를 모두 해 보라.
+  (A) Test on test data  ← 기본으로 설정해 두었다.
+      위에서 그룹 분할한 Train/Test 로 최종 평가한다.
+  (B) Cross validation by feature → group_fold 선택
+      = 실습지의 GroupKFold(n_splits=5). group_fold 는 장비 단위로
+        미리 부여한 5-폴드 메타 컬럼이라 같은 장비가 두 폴드에
+        걸치지 않는다. (B) 를 쓸 땐 Data 입력만 있으면 된다.
+Target class 를 '1' 로 두어야 Recall/Precision 이 재고장 기준이 된다.</text>
+		<text id="5" type="text/plain" rect="(1620, 170, 400, 205)" font-family="Helvetica" font-size="11">✅ 기대 출력 (Test on test data · Target class = 1)
+   Constant(Dummy)  AUC 0.500  CA 0.809  Recall 0.000
+   Naive Bayes      AUC 0.672  CA 0.745  Recall 0.470
+   Logistic(bal)    AUC 0.634  CA 0.624  Recall 0.568
+   Random Forest    AUC 0.669  CA 0.813  Recall 0.059
+   Gradient Boost   AUC 0.699  CA 0.812  Recall 0.114
+· Dummy 의 CA 가 0.809 로 가장 높은 축에 든다 — 재고장을 하나도
+  못 맞히면서도. 이것이 불균형에서 accuracy 를 버려야 하는 이유다.
+· 혼동행렬에서 FN(놓친 재고장) 칸을 본다. 임계값 0.5 에서 대부분의
+  모델이 재고장의 90% 가까이를 놓친다 → 05 워크플로우에서 해결.
+· 생각해보기 ① 모든 모델이 Dummy 보다 AUC 가 높은가?
+             ② 불균형 보정을 켠 모델은 Recall 이 왜 크게 오르고
+                CA 는 왜 떨어지는가?</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASVawEAAAAAAAB9lCiMDHJlY2VudF9wYXRoc5RdlIweb3Jhbmdld2lkZ2V0LnV0aWxzLmZpbGVk
+aWFsb2dzlIwKUmVjZW50UGF0aJSTlCmBlH2UKIwHYWJzcGF0aJSMgi9Vc2Vycy9iZWdyZWF0L1RB
+RUVVTl9EQVRBL3dvcmtzcGFjZXMvMjAyNi1kYXRhZXhwZXJ0LzAyX2NsYXNzLzThhIvhhbXhhq/h
+hI7hhaEvbXktZWRhLWFwcC93b3JrZmxvdy9kYXRhL2VxdWlwbWVudF9tYWludGVuYW5jZS50YWKU
+jAZwcmVmaXiUjAdiYXNlZGlylIwHcmVscGF0aJSMHmRhdGEvZXF1aXBtZW50X21haW50ZW5hbmNl
+LnRhYpSMBXRpdGxllIwAlIwFc2hlZXSUaA+MC2ZpbGVfZm9ybWF0lE51YmGMBnNvdXJjZZRLAIwL
+c2hlZXRfbmFtZXOUfZSMC19fdmVyc2lvbl9flEsBdS4=
+</properties>
+		<properties node_id="1" format="literal">{'_default_method_index': 3, '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'__version__': 1}</properties>
+		<properties node_id="4" format="literal">{'scriptLibrary': [{'name': '실습 코드', 'script': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "train"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'filename': None}], 'currentScriptIndex': 0, 'scriptText': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "train"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'splitterState': None, 'vimModeEnabled': False, '__version__': 2}</properties>
+		<properties node_id="5" format="literal">{'scriptLibrary': [{'name': '실습 코드', 'script': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "test"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'filename': None}], 'currentScriptIndex': 0, 'scriptText': '# ── 실습지 문제 3-1 · 그룹 분할 (GroupShuffleSplit) ───────────────────────────\n# 장비 1대당 정비이력이 여러 건이므로 무작위로 섞으면 같은 장비가 train/test\n# 양쪽에 들어가 모델이 그 장비를 "외워서" 맞힌다(= 그룹 누수).\n# Orange 의 Data Sampler 에는 그룹 분할이 없으므로 이 위젯이 그 역할을 한다.\n#\n# 실행: 위젯을 열고 Run(⌘R / Ctrl+R). 아래 MODE 만 바꾸면 반대쪽이 나온다.\nimport numpy as np\nfrom sklearn.model_selection import GroupShuffleSplit\n\nMODE = "test"           # "train" 또는 "test"\nGROUP_COL = "equipment_id"\nTEST_SIZE, SEED = 0.2, 42\n\ndata = in_data\ngroups = np.asarray([str(v) for v in data.get_column(GROUP_COL)])\n\ngss = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SEED)\ntrain_idx, test_idx = next(gss.split(np.arange(len(data)), groups=groups))\nidx = train_idx if MODE == "train" else test_idx\n\nout_data = data[idx]\nprint(f"[{MODE}] {len(out_data)}행 x {len(out_data.domain.attributes)}피처")\nprint(f"[{MODE}] 재고장 비율 = {np.nanmean(out_data.Y):.3f}")\nprint(f"[{MODE}] 장비 수 = {len(set(groups[idx]))}")\n', 'splitterState': None, 'vimModeEnabled': False, '__version__': 2}</properties>
+		<properties node_id="6" format="literal">{'__version__': 1}</properties>
+		<properties node_id="7" format="literal">{'class_weight': True, 'penalty_type': 1, 'C_index': 61, '__version__': 2}</properties>
+		<properties node_id="8" format="literal">{'__version__': 1}</properties>
+		<properties node_id="9" format="literal">{'__version__': 1}</properties>
+		<properties node_id="10" format="literal">{'n_estimators': 100, 'class_weight': True, 'use_random_state': True, '__version__': 1}</properties>
+		<properties node_id="11" format="literal">{'__version__': 1}</properties>
+		<properties node_id="12" format="literal">{'__version__': 1}</properties>
+		<properties node_id="13" format="literal">{'resampling': 5, 'n_folds': 2, '__version__': 4}</properties>
+		<properties node_id="14" format="literal">{'__version__': 1}</properties>
+		<properties node_id="15" format="literal">{'__version__': 1}</properties>
+		<properties node_id="16" format="literal">{'__version__': 1}</properties>
+		<properties node_id="17" format="literal">{'__version__': 1}</properties>
+	</node_properties>
+</scheme>

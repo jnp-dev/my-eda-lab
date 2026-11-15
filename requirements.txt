@@ -1,0 +1,32 @@
+# 기본 분석 도구
+pandas
+numpy
+matplotlib
+seaborn
+
+# 자동화 EDA
+ydata-profiling
+sweetviz
+statsmodels          # ACF/PACF 자기상관 분석 (EDA 시각화 가이드)
+
+# 머신러닝
+scikit-learn
+xgboost
+lightgbm
+shap
+optuna              # 하이퍼파라미터 베이지안 최적화 (실습 3)
+joblib              # 모델 저장/로드 (실습 4)
+
+# 웹 앱
+streamlit
+plotly
+
+# 파이프라인 (선택)
+mlflow
+prefect
+
+# 노트북 / 데이터 입출력
+jupyterlab          # .ipynb 실행 환경
+ipykernel           # 커널
+openpyxl            # .xlsx 읽기 (장비 정비이력 데이터셋)
+setuptools<81       # ydata-profiling 의 pkg_resources 의존 (81+ 에서 제거됨)

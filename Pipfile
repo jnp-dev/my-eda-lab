@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+setuptools = "<81"
+pandas = "*"
+numpy = "*"
+matplotlib = "*"
+seaborn = "*"
+ydata-profiling = "*"
+sweetviz = "*"
+scikit-learn = "*"
+xgboost = "*"
+lightgbm = "*"
+shap = "*"
+streamlit = "*"
+plotly = "*"
+mlflow = "*"
+prefect = "*"
+openpyxl = "*"
+optuna = "*"
+jupyterlab = "*"
+ipykernel = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"

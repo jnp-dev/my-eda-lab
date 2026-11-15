@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="08 · 선택 Lab (시각화 고도화)" description="실습지 선택 Lab A · 다변량 관계와 투영 시각화">
+	<nodes>
+		<node id="0" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="장비 정비이력" position="120, 430" />
+		<node id="1" name="Impute" qualified_name="Orange.widgets.data.owimpute.OWImpute" project_name="Orange3" version="" title="결측 처리" position="310, 430" />
+		<node id="2" name="Purge Domain" qualified_name="Orange.widgets.data.owpurgedomain.OWPurgeDomain" project_name="Orange3" version="" title="도메인 정리" position="470, 430" />
+		<node id="3" name="Data Sampler" qualified_name="Orange.widgets.data.owdatasampler.OWDataSampler" project_name="Orange3" version="" title="20% 표본 (속도용)" position="630, 430" />
+		<node id="4" name="Scatter Plot" qualified_name="Orange.widgets.visualize.owscatterplot.OWScatterPlot" project_name="Orange3" version="" title="① 정보량 높은 조합 찾기" position="740, 130" />
+		<node id="5" name="Heat Map" qualified_name="Orange.widgets.visualize.owheatmap.OWHeatMap" project_name="Orange3" version="" title="② Heat Map" position="740, 240" />
+		<node id="6" name="Linear Projection" qualified_name="Orange.widgets.visualize.owlinearprojection.OWLinearProjection" project_name="Orange3" version="" title="③ Linear Projection" position="740, 350" />
+		<node id="7" name="FreeViz" qualified_name="Orange.widgets.visualize.owfreeviz.OWFreeViz" project_name="Orange3" version="" title="④ FreeViz" position="740, 460" />
+		<node id="8" name="Radviz" qualified_name="Orange.widgets.visualize.owradviz.OWRadviz" project_name="Orange3" version="" title="⑤ Radviz" position="740, 570" />
+		<node id="9" name="t-SNE" qualified_name="Orange.widgets.unsupervised.owtsne.OWtSNE" project_name="Orange3" version="" title="⑥ t-SNE" position="740, 680" />
+		<node id="10" name="PCA" qualified_name="Orange.widgets.unsupervised.owpca.OWPCA" project_name="Orange3" version="" title="⑦ PCA" position="740, 790" />
+		<node id="11" name="Scatter Plot" qualified_name="Orange.widgets.visualize.owscatterplot.OWScatterPlot" project_name="Orange3" version="" title="⑧ 주성분 산점도" position="960, 790" />
+		<node id="12" name="k-Means" qualified_name="Orange.widgets.unsupervised.owkmeans.OWKMeans" project_name="Orange3" version="" title="⑨ k-Means 군집" position="740, 900" />
+		<node id="13" name="Scatter Plot" qualified_name="Orange.widgets.visualize.owscatterplot.OWScatterPlot" project_name="Orange3" version="" title="⑩ 군집 색칠" position="960, 900" />
+		<node id="14" name="Mosaic Display" qualified_name="Orange.widgets.visualize.owmosaic.OWMosaicDisplay" project_name="Orange3" version="" title="⑪ Mosaic Display" position="740, 1060" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="2" source_node_id="2" sink_node_id="3" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+		<link id="3" source_node_id="3" sink_node_id="4" source_channel="Data Sample" sink_channel="Data" enabled="true" source_channel_id="data_sample" sink_channel_id="data" />
+		<link id="4" source_node_id="3" sink_node_id="5" source_channel="Data Sample" sink_channel="Data" enabled="true" source_channel_id="data_sample" sink_channel_id="data" />
+		<link id="5" source_node_id="3" sink_node_id="6" source_channel="Data Sample" sink_channel="Data" enabled="true" source_channel_id="data_sample" sink_channel_id="data" />
+		<link id="6" source_node_id="3" sink_node_id="7" source_channel="Data Sample" sink_channel="Data" enabled="true" source_channel_id="data_sample" sink_channel_id="data" />
+		<link id="7" source_node_id="3" sink_node_id="8" source_channel="Data Sample" sink_channel="Data" enabled="true" source_channel_id="data_sample" sink_channel_id="data" />
+		<link id="8" source_node_id="3" sink_node_id="9" source_channel="Data Sample" sink_channel="Data" enabled="true" source_channel_id="data_sample" sink_channel_id="data" />
+		<link id="9" source_node_id="3" sink_node_id="10" source_channel="Data Sample" sink_channel="Data" enabled="true" source_channel_id="data_sample" sink_channel_id="data" />
+		<link id="10" source_node_id="3" sink_node_id="12" source_channel="Data Sample" sink_channel="Data" enabled="true" source_channel_id="data_sample" sink_channel_id="data" />
+		<link id="11" source_node_id="3" sink_node_id="14" source_channel="Data Sample" sink_channel="Data" enabled="true" source_channel_id="data_sample" sink_channel_id="data" />
+		<link id="12" source_node_id="10" sink_node_id="11" source_channel="Transformed Data" sink_channel="Data" enabled="true" source_channel_id="transformed_data" sink_channel_id="data" />
+		<link id="13" source_node_id="12" sink_node_id="13" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="annotated_data" sink_channel_id="data" />
+	</links>
+	<annotations>
+		<text id="0" type="text/plain" rect="(40, 20, 800, 130)" font-family="Helvetica" font-size="14">[선택 Lab A] 시각화 고도화  ·  실습지 Lab A-1, A-2
+
+  pairplot(다변량 관계)  → Scatter Plot 의 Find Informative Projections · Linear Projection
+  3D 산점도             → FreeViz · Radviz · t-SNE (고차원을 2D 로 눌러 담는다)
+  상관 히트맵            → Heat Map
+5,000행 전부를 t-SNE 에 넣으면 느리므로 Data Sampler 로 20% 만 뽑아 쓴다.
+※ Lab B(MLflow) · Lab C(Prefect) 는 Orange 에 대응 위젯이 없다 — README 참고.</text>
+		<text id="1" type="text/plain" rect="(900, 100, 380, 85)" font-family="Helvetica" font-size="11">Lab A-1 · pairplot 대응.
+'Find Informative Projections' 버튼을 누르면 타깃을 가장 잘
+가르는 변수쌍을 점수 순으로 추천해 준다.
+seaborn pairplot 을 눈으로 훑는 일을 자동화한 셈.</text>
+		<text id="2" type="text/plain" rect="(900, 215, 380, 60)" font-family="Helvetica" font-size="11">Lab A-1 · Group by = failure_within_30days 로 두면
+재고장/정상 그룹의 값 패턴 차이가 색으로 드러난다.</text>
+		<text id="3" type="text/plain" rect="(900, 340, 380, 105)" font-family="Helvetica" font-size="11">Lab A-2 · 3D 산점도 대응.
+여러 수치형 축을 한 평면에 투영해 보는 방법들이다.
+Color = failure_within_30days 로 두고
+두 색이 갈리는 방향의 축(변수)이 무엇인지 읽는다.</text>
+		<text id="4" type="text/plain" rect="(900, 660, 380, 85)" font-family="Helvetica" font-size="11">⑥ t-SNE — 비선형 축소. 군집이 보이면 '비슷한 정비건'의 무리다.
+⑦⑧ PCA — Transformed Data 를 Scatter Plot 에 물려 PC1·PC2 로 본다.
+    설명분산 곡선에서 몇 개 성분이면 충분한지 확인.</text>
+		<text id="5" type="text/plain" rect="(900, 980, 400, 80)" font-family="Helvetica" font-size="11">⑨⑩ 심화 · 군집 결과(Cluster)를 Color 로 두고
+재고장 비율이 유난히 높은 군집이 있는지 본다.
+있다면 그 군집의 조건이 곧 '위험 장비 프로파일'이다.</text>
+		<text id="6" type="text/plain" rect="(900, 1060, 380, 70)" font-family="Helvetica" font-size="11">⑪ 범주형 다변량 · maintenance_type x equipment_type x 타깃 을
+한 그림에 놓고 어느 칸의 재고장률이 튀는지 본다.
+(plotly 애니메이션 막대의 정적 버전)</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gASVawEAAAAAAAB9lCiMDHJlY2VudF9wYXRoc5RdlIweb3Jhbmdld2lkZ2V0LnV0aWxzLmZpbGVk
+aWFsb2dzlIwKUmVjZW50UGF0aJSTlCmBlH2UKIwHYWJzcGF0aJSMgi9Vc2Vycy9iZWdyZWF0L1RB
+RUVVTl9EQVRBL3dvcmtzcGFjZXMvMjAyNi1kYXRhZXhwZXJ0LzAyX2NsYXNzLzThhIvhhbXhhq/h
+hI7hhaEvbXktZWRhLWFwcC93b3JrZmxvdy9kYXRhL2VxdWlwbWVudF9tYWludGVuYW5jZS50YWKU
+jAZwcmVmaXiUjAdiYXNlZGlylIwHcmVscGF0aJSMHmRhdGEvZXF1aXBtZW50X21haW50ZW5hbmNl
+LnRhYpSMBXRpdGxllIwAlIwFc2hlZXSUaA+MC2ZpbGVfZm9ybWF0lE51YmGMBnNvdXJjZZRLAIwL
+c2hlZXRfbmFtZXOUfZSMC19fdmVyc2lvbl9flEsBdS4=
+</properties>
+		<properties node_id="1" format="literal">{'_default_method_index': 3, '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'sampling_type': 0, 'sampleSizePercentage': 20, 'stratify': True, 'use_seed': True, '__version__': 2}</properties>
+		<properties node_id="4" format="literal">{'__version__': 5}</properties>
+		<properties node_id="5" format="literal">{'__version__': 3}</properties>
+		<properties node_id="6" format="literal">{'__version__': 6}</properties>
+		<properties node_id="7" format="literal">{'__version__': 3}</properties>
+		<properties node_id="8" format="literal">{'__version__': 3}</properties>
+		<properties node_id="9" format="literal">{'__version__': 4}</properties>
+		<properties node_id="10" format="literal">{'__version__': 1}</properties>
+		<properties node_id="11" format="literal">{'__version__': 5}</properties>
+		<properties node_id="12" format="literal">{'__version__': 2}</properties>
+		<properties node_id="13" format="literal">{'__version__': 5}</properties>
+		<properties node_id="14" format="literal">{'__version__': 2}</properties>
+	</node_properties>
+</scheme>
